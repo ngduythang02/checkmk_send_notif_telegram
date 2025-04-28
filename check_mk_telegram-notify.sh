@@ -49,18 +49,18 @@ if [[ ${NOTIFY_PARAMETER_3} == "privacy" ]]; then
         fi
 
         # IPv6 IP addresses
-        if [ ${NOTIFY_HOST_ADDRESS_6} ]; then
-                slice="${NOTIFY_HOST_ADDRESS_6}"
-                count=1
-                while [ "$count" -le 8 ]
-                do
-                        declare sec"$count"="${slice%%:*}"
-                        slice="${slice#*:}"
-                        count=$((count+1))
-                done
+        #if [ ${NOTIFY_HOST_ADDRESS_6} ]; then
+                #slice="${NOTIFY_HOST_ADDRESS_6}"
+                #count=1
+                #while [ "$count" -le 8 ]
+                #do
+                        #declare sec"$count"="${slice%%:*}"
+                        #slice="${slice#*:}"
+                        #count=$((count+1))
+                #done
                 # Adjust the output to your privacy needs here (Details in the readme.md)
-                NOTIFY_HOST_ADDRESS_6="${sec1}:${sec2}:${sec3}:${sec4}:ffff:ffff:ffff:${sec8}"
-        fi
+                #NOTIFY_HOST_ADDRESS_6="${sec1}:${sec2}:${sec3}:${sec4}:ffff:ffff:ffff:${sec8}"
+        #fi
 else
         if [ ! -z ${NOTIFY_PARAMETER_3} ]; then
                 echo "Invalid privacy parameter, check your Check_MK settings." >&2
@@ -102,7 +102,8 @@ else
         MESSAGE+="State changed from ${NOTIFY_PREVIOUSHOSTHARDSHORTSTATE} to ${NOTIFY_HOSTSHORTSTATE}%0A"
         MESSAGE+="${NOTIFY_HOSTOUTPUT}%0A"
 fi
-MESSAGE+="%0AIPv4: ${NOTIFY_HOST_ADDRESS_4} %0AIPv6: ${NOTIFY_HOST_ADDRESS_6}%0A"
+#MESSAGE+="%0AIPv4: ${NOTIFY_HOST_ADDRESS_4} %0AIPv6: ${NOTIFY_HOST_ADDRESS_6}%0A"
+MESSAGE+="%0AIPv4: ${NOTIFY_HOST_ADDRESS_4}%0A"
 MESSAGE+="${NOTIFY_SHORTDATETIME} | ${OMD_SITE}"
 
 # Send message to Telegram bot
